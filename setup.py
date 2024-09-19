@@ -6,8 +6,8 @@ with open("README.md", "r") as fh:
 
 setup(
     name="vhost-gen",
-    version="1.0.10",
-    description="Configurable vHost generator for Apache 2.2, Apache 2.4 and Nginx.",
+    version="1.0.11",
+    description="Configurable vHost generator for Apache 2.4 and Nginx.",
     license="MIT",
     long_description=long_description,
     long_description_content_type="text/markdown",

@@ -137,12 +137,12 @@ function fuzzy() {
 ### Round 1 (Supported Options only)
 ###
 declare -a args=(c p n t s o)
-declare -a vals="(./ ./etc ./etc/conf.yml ./examples/conf.nginx.yml ./examples/conf.apache22.yml ./examples/conf.apache24.yml ./etc/templates ../ ../etc ../etc/conf.yml ../examples/conf.nginx.yml ../examples/conf.apache22.yml ../examples/conf.apache24.yml ../etc/templates ../../ ../../etc ../../etc/conf.yml ../../examples/conf.nginx.yml ../../examples/conf.apache22.yml ../../examples/conf.apache24.yml ../../etc/templates /etc /etc/vhost-gen /etc/vhost-gen/conf.yml /etc/vhost-gen/templates)"
+declare -a vals="(./ ./etc ./etc/conf.yml ./examples/conf.nginx.yml ./examples/conf.apache24.yml ./etc/templates ../ ../etc ../etc/conf.yml ../examples/conf.nginx.yml ../examples/conf.apache24.yml ../etc/templates ../../ ../../etc ../../etc/conf.yml ../../examples/conf.nginx.yml ../../examples/conf.apache24.yml ../../etc/templates /etc /etc/vhost-gen /etc/vhost-gen/conf.yml /etc/vhost-gen/templates)"
 fuzzy
 
 ###
 ### Round 2 (Any Options)
 ###
 declare -a args="(a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9)"
-declare -a vals="(c p n t -c -p -n -t -h -v ./ ./etc ./etc/conf.yml ./examples/conf.nginx.yml ./examples/conf.apache22.yml ./examples/conf.apache24.yml ./etc/templates ../ ../etc ../etc/conf.yml ../examples/conf.nginx.yml ../examples/conf.apache22.yml ../examples/conf.apache24.yml ../etc/templates ../../ ../../etc ../../etc/conf.yml ../../examples/conf.nginx.yml ../../examples/conf.apache22.yml ../../examples/conf.apache24.yml ../../etc/templates /etc /etc/vhost-gen /etc/vhost-gen/conf.yml /etc/vhost-gen/templates)"
+declare -a vals="(c p n t -c -p -n -t -h -v ./ ./etc ./etc/conf.yml ./examples/conf.nginx.yml ./examples/conf.apache24.yml ./etc/templates ../ ../etc ../etc/conf.yml ../examples/conf.nginx.yml ../examples/conf.apache24.yml ../etc/templates ../../ ../../etc ../../etc/conf.yml ../../examples/conf.nginx.yml ../../examples/conf.apache24.yml ../../etc/templates /etc /etc/vhost-gen /etc/vhost-gen/conf.yml /etc/vhost-gen/templates)"
 fuzzy

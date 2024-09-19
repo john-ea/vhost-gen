@@ -2,7 +2,7 @@
 # Generic vhost generator configuration file.
 # Location: /etc/vhost-gen/conf.yml
 #
-# See: https://github.com/devilbox/vhost-gen
+# See: https://github.com/john-ea/vhost-gen
 #
 # If not specified or file is missing the following
 # default values will be merged to your current (if any)
@@ -44,7 +44,6 @@
 # The server type determines which template
 # from etc/templates/ will be chosen.
 # Allowed server types:
-# server: apache22
 # server: apache24
 # server: nginx
 server: nginx
@@ -95,9 +94,10 @@ vhost:
   # SSL Definition
   ssl:
     http2: True
+    http3: True
     dir_crt: /etc/httpd/cert
     dir_key: /etc/httpd/cert
-    protocols: 'TLSv1 TLSv1.1 TLSv1.2'
+    protocols: 'TLSv1 TLSv1.1 TLSv1.2 TLSv1.3'
     honor_cipher_order: 'on'
     ciphers: 'HIGH:!aNULL:!MD5'
 

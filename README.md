@@ -1,5 +1,13 @@
 # vhost-gen
+___
 
+The original cert-gen was created and maintained by [cytopia](https://github.com/cytopia) in the [devilbox/vhost-gen](https://github.com/devilbox/vhost-gen) repository.
+
+Thanks to [cytopia](https://github.com/cytopia) and the [devilbox](https://github.com/devilbox) project.
+___
+
+> ##### 🐱 GitHub Fork: [john-ea/vhost-gen](https://github.com/john-ea/vhost-gen)
+> ##### 🐱 GitHub original “upstream” repository: : [devilbox/vhost-gen](https://github.com/devilbox/vhost-gen)
 [![](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![PyPI](https://img.shields.io/pypi/v/vhost-gen)](https://pypi.org/project/vhost-gen/)
 [![PyPI - Status](https://img.shields.io/pypi/status/vhost-gen)](https://pypi.org/project/vhost-gen/)
@@ -10,18 +18,18 @@
 
 **Continuous Integration**
 
-[![testing](https://github.com/devilbox/vhost-gen/workflows/testing/badge.svg)](https://github.com/devilbox/vhost-gen/actions?query=workflow%3Atesting)
-[![fuzzing](https://github.com/devilbox/vhost-gen/workflows/fuzzing/badge.svg)](https://github.com/devilbox/vhost-gen/actions?query=workflow%3Afuzzing)
+[![testing](https://github.com/john-ea/vhost-gen/workflows/testing/badge.svg)](https://github.com/john-ea/vhost-gen/actions?query=workflow%3Atesting)
+[![fuzzing](https://github.com/john-ea/vhost-gen/workflows/fuzzing/badge.svg)](https://github.com/john-ea/vhost-gen/actions?query=workflow%3Afuzzing)
 
-[![linting](https://github.com/devilbox/vhost-gen/workflows/linting/badge.svg)](https://github.com/devilbox/vhost-gen/actions?query=workflow%3Alinting)
-[![pylint](https://github.com/devilbox/vhost-gen/workflows/pylint/badge.svg)](https://github.com/devilbox/vhost-gen/actions?query=workflow%3Apylint)
-[![black](https://github.com/devilbox/vhost-gen/workflows/black/badge.svg)](https://github.com/devilbox/vhost-gen/actions?query=workflow%3Ablack)
-[![mypy](https://github.com/devilbox/vhost-gen/workflows/mypy/badge.svg)](https://github.com/devilbox/vhost-gen/actions?query=workflow%3Amypy)
-[![pycode](https://github.com/devilbox/vhost-gen/workflows/pycode/badge.svg)](https://github.com/devilbox/vhost-gen/actions?query=workflow%3Apycode)
-[![pydoc](https://github.com/devilbox/vhost-gen/workflows/pydoc/badge.svg)](https://github.com/devilbox/vhost-gen/actions?query=workflow%3Apydoc)
+[![linting](https://github.com/john-ea/vhost-gen/workflows/linting/badge.svg)](https://github.com/john-ea/vhost-gen/actions?query=workflow%3Alinting)
+[![pylint](https://github.com/john-ea/vhost-gen/workflows/pylint/badge.svg)](https://github.com/john-ea/vhost-gen/actions?query=workflow%3Apylint)
+[![black](https://github.com/john-ea/vhost-gen/workflows/black/badge.svg)](https://github.com/john-ea/vhost-gen/actions?query=workflow%3Ablack)
+[![mypy](https://github.com/john-ea/vhost-gen/workflows/mypy/badge.svg)](https://github.com/john-ea/vhost-gen/actions?query=workflow%3Amypy)
+[![pycode](https://github.com/john-ea/vhost-gen/workflows/pycode/badge.svg)](https://github.com/john-ea/vhost-gen/actions?query=workflow%3Apycode)
+[![pydoc](https://github.com/john-ea/vhost-gen/workflows/pydoc/badge.svg)](https://github.com/john-ea/vhost-gen/actions?query=workflow%3Apydoc)
 
 
-**[vhost-gen](bin/vhost-gen)** will dynamically generate **vhost** or **reverse proxy** (with or without **websocket support**) configuration files for Apache 2.2, Apache 2.4 and Nginx depending on what you have set in [conf.yml](etc/conf.yml). This makes it easy to switch between different web servers while keeping the exact same functionality.
+**[vhost-gen](bin/vhost-gen)** will dynamically generate **vhost** or **reverse proxy** (with or without **websocket support**) configuration files for Apache 2.4 and Nginx depending on what you have set in [conf.yml](etc/conf.yml). This makes it easy to switch between different web servers while keeping the exact same functionality.
 
 ---
 
@@ -35,7 +43,7 @@ pip install vhost-gen
 #### From git
 **Note:** When using the Makefile, ensure that `pyyaml` is installed (`pip install pyyaml`).
 ```bash
-git clone https://github.com/devilbox/vhost-gen
+git clone https://github.com/john-ea/vhost-gen
 cd vhost-gen
 sudo make install
 ```
@@ -43,7 +51,7 @@ sudo make install
 
 ## What is all the fuzz?
 
-Imagine you have to create virtual hosts for your web server over and over again. The only things that might change are document root, log files and server names and possibly some other minor changes. Instead of having to copy and adjust the server's vhost config file each time, you can use `vhost-gen` to generate them for you. By supporting different web server versions, it makes it also easy for you to switch back and forth between Apache 2.2, Apache 2.4 and Nginx.
+Imagine you have to create virtual hosts for your web server over and over again. The only things that might change are document root, log files and server names and possibly some other minor changes. Instead of having to copy and adjust the server's vhost config file each time, you can use `vhost-gen` to generate them for you. By supporting different web server versions, it makes it also easy for you to switch back and forth between Apache 2.4 and Nginx.
 
 ```bash
 # vHost
@@ -120,7 +128,6 @@ If you don't want to implement it yourself, there are already four fully functio
 |------------|------------|------------|
 | Nginx stable (official) | nginx | https://github.com/devilbox/docker-nginx-stable |
 | Nginx mainline (official) | nginx | https://github.com/devilbox/docker-nginx-mainline |
-| Apache 2.2 (official) | Apache 2.2 | https://github.com/devilbox/docker-apache-2.2 |
 | Apache 2.4 (official) | Apache 2.4 | https://github.com/devilbox/docker-apache-2.4 |
 
 
@@ -133,7 +140,6 @@ If you are not satisfied with the default definitions for the webserver configur
 | Name       | Template with default definitions          |
 |------------|--------------------------------------------|
 | Nginx      | [nginx.yml](etc/templates/nginx.yml)       |
-| Apache 2.2 | [apache22.yml](etc/templates/apache22.yml) |
 | Apache 2.4 | [apache24.yml](etc/templates/apache24.yml) |
 
 #### Supported Features
@@ -213,7 +219,7 @@ The `features` section contains definitions of features that can be enabled or d
 Whenever you edit the template, make sure not to misspell any placeholders. They will not get replaced when spellt wrong.
 
 
-Let's take for example the `features.server_status` section from Apache 2.2:
+Let's take for example the `features.server_status` section from Apache 2.4:
 ```yml
   server_status: |
     # Status Page
@@ -243,7 +249,7 @@ Usage: vhost-gen -p|r <str> -n <str> [-l <str> -c <str> -t <str> -o <str> -d -s 
        vhost-gen --version
 
 vhost-gen will dynamically generate vhost configuration files
-for Nginx, Apache 2.2 or Apache 2.4 depending on what you have set
+for Nginx, Apache 2.4 depending on what you have set
 in /etc/vhost-gen/conf.yml
 
 Required arguments:

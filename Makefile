@@ -234,7 +234,7 @@ install:
 	mkdir -p /etc/vhost-gen
 	mkdir -p /etc/vhost-gen/templates
 	@# Install binary
-	install -m 0755 $(BINPATH)/$(BINNAME) /usr/bin/$(BINNAME)
+	install -m 0755 $(BINPATH)$(BINNAME) /usr/bin/$(BINNAME)
 	@# Install configs
 	install -m 0644 etc/$(CONFIG) /etc/vhost-gen/$(CONFIG)
 	install -m 0644 etc/$(TPLDIR)/*.yml /etc/vhost-gen/$(TPLDIR)

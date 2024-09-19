@@ -8,7 +8,7 @@ endif
 .PHONY: help lint code dist sdist bdist build checkbuild deploy autoformat clean
 
 
-VERSION = 2.7
+VERSION = 3.8
 BINPATH = bin/
 BINNAME = vhost-gen
 

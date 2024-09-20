@@ -53,7 +53,6 @@ DEFAULT_CONFIG = {
         "index": ["index.php", "index.html", "index.htm"],
         "ssl": {
             "http2": True,
-            "http3": True,
             "dir_crt": "",
             "dir_key": "",
             "honor_cipher_order": "on",
@@ -465,15 +464,9 @@ def vhost_get_http_proto(config, ssl):
         return "http/1.1"
 
     if config["server"] == "nginx":
-        output = ""
         if ssl and config["vhost"]["ssl"]["http2"]:
-            output += "http2 on;"
-        if ssl and config["vhost"]["ssl"]["http3"]:
-            if ssl and config["vhost"]["ssl"]["http2"]:
-                output += "\n"
-            output += "http3 on;"
-        return str_indent(output, 4)
-
+            return "http2 on;"
+        return "http2 off;"
     return ""
 
 
@@ -614,17 +607,6 @@ def vhost_get_vhost_ssl(config, template, server_name, verbose):
             "__SSL_PROTOCOLS__": to_str(config["vhost"]["ssl"]["protocols"]),
             "__SSL_HONOR_CIPHER_ORDER__": to_str(config["vhost"]["ssl"]["honor_cipher_order"]),
             "__SSL_CIPHERS__": to_str(config["vhost"]["ssl"]["ciphers"]),
-        },
-    )
-
-
-def vhost_get_vhost_http3(config, template):
-    # type: (Dict[str, Any], Dict[str, Any]) -> str
-    """Get ssl definition."""
-    return str_replace(
-        template["features"]["http3"],
-        {
-            "__SSL_PORT__": to_str(config["vhost"]["ssl_port"]),
         },
     )
 
@@ -829,7 +811,6 @@ def get_vhost_plain(
         {
             "__PORT__": vhost_get_port(config, False),
             "__HTTP_PROTO__": vhost_get_http_proto(config, False),
-            "__HTTP3_QUIC__": "",
             "__DEFAULT_VHOST__": vhost_get_default_server(config, default),
             "__DOCUMENT_ROOT__": vhost_get_docroot_path(config, docroot, proxy, verbose),
             "__VHOST_NAME__": vhost_get_server_name(config, server_name, default),
@@ -870,7 +851,6 @@ def get_vhost_ssl(
         {
             "__PORT__": vhost_get_port(config, True),
             "__HTTP_PROTO__": vhost_get_http_proto(config, True),
-            "__HTTP3_QUIC__": str_indent(vhost_get_vhost_http3(config, tpl), 4),
             "__DEFAULT_VHOST__": vhost_get_default_server(config, default),
             "__DOCUMENT_ROOT__": vhost_get_docroot_path(config, docroot, proxy, verbose),
             "__VHOST_NAME__": vhost_get_server_name(config, server_name, default),
@@ -910,7 +890,6 @@ def get_vhost_redir(
         {
             "__PORT__": vhost_get_port(config, False),
             "__HTTP_PROTO__": vhost_get_http_proto(config, False),
-            "__HTTP3_QUIC__": "",
             "__DEFAULT_VHOST__": vhost_get_default_server(config, default),
             "__DOCUMENT_ROOT__": vhost_get_docroot_path(config, docroot, proxy, verbose),
             "__VHOST_NAME__": vhost_get_server_name(config, server_name, default),

@@ -48,7 +48,6 @@ vhost: |
   server {
       listen       __PORT____DEFAULT_VHOST__;
       __HTTP_PROTO__
-      __HTTP3_QUIC__
       server_name  __VHOST_NAME__;
 
       access_log   "__ACCESS_LOG__" combined;
@@ -118,15 +117,6 @@ features:
     ssl_protocols             __SSL_PROTOCOLS__;
     ssl_prefer_server_ciphers __SSL_HONOR_CIPHER_ORDER__;
     ssl_ciphers               __SSL_CIPHERS__;
-
-  # HTTP/3 with QUIC Configuration
-  http3: |
-    listen __SSL_PORT__ quic reuseport;
-
-    quic_gso on;
-    quic_retry on;
-
-    add_header Alt-Svc 'h3=":__SSL_PORT__"; ma=86400';
 
   # Redirect to SSL directive
   redirect: |

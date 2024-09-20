@@ -19,9 +19,11 @@ jobs:
       fail-fast: False
       matrix:
         version:
-          - '2.7'
-          - '3.7'
           - '3.8'
+          - '3.9'
+          - '3.10'
+          - '3.11'
+          - '3.12'
 
     name: "[ ${{ matrix.target }} ${{ matrix.version}} ]"
     steps:
@@ -29,7 +31,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.version }}
           architecture: x64

@@ -6,7 +6,7 @@
 # Copyright (c) 2017 cytopia <cytopia@everythingcli.org>
 
 """
-vHost creator for Apache 2.2, Apache 2.4 and Nginx.
+vHost creator for Apache 2.4 and Nginx.
 """
 
 # --------------------------------------------------------------------------------------------------
@@ -28,9 +28,9 @@ if os.environ.get("MYPY_CHECK", False):
 # Globals
 # --------------------------------------------------------------------------------------------------
 APPNAME = "vhost-gen"
-APPREPO = "https://github.com/devilbox/vhost-gen"
-VERSION = "1.0.10"
-RELDATE = "2022-12-31"
+APPREPO = "https://github.com/john-ea/vhost-gen"
+VERSION = "1.0.11"
+RELDATE = "2024-09-19"
 
 # Default paths
 CONFIG_PATH = "/etc/vhost-gen/conf.yml"
@@ -57,7 +57,7 @@ DEFAULT_CONFIG = {
             "dir_key": "",
             "honor_cipher_order": "on",
             "ciphers": "HIGH:!aNULL:!MD5",
-            "protocols": "TLSv1 TLSv1.1 TLSv1.2",
+            "protocols": "TLSv1 TLSv1.1 TLSv1.2 TLSv1.3",
         },
         "log": {
             "access": {"prefix": "", "stdout": False},
@@ -72,7 +72,7 @@ DEFAULT_CONFIG = {
 }
 
 # Available templates
-TEMPLATES = {"apache22": "apache22.yml", "apache24": "apache24.yml", "nginx": "nginx.yml"}
+TEMPLATES = {"apache24": "apache24.yml", "nginx": "nginx.yml"}
 
 
 # --------------------------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ Usage: vhost-gen -p|r <str> -n <str> [-l <str> -c <str> -t <str> -o <str> -d -s 
        vhost-gen --version
 
 vhost-gen will dynamically generate vhost configuration files
-for Nginx, Apache 2.2 or Apache 2.4 depending on what you have set
+for Nginx, Apache 2.4 depending on what you have set
 in /etc/vhost-gen/conf.yml
 
 Required arguments:
@@ -164,7 +164,7 @@ def print_version():
     # type: () -> None
     """Show program version."""
     print("%s: Version v%s (%s) by cytopia" % (APPNAME, VERSION, RELDATE))
-    print("<https://github.com/devilbox/vhost-gen>")
+    print("<https://github.com/john-ea/vhost-gen>")
     print("<https://github.com/cytopia>")
     print("The MIT License (MIT)")
 
@@ -412,12 +412,6 @@ def validate_args_opt(config_path, tpl_dir, verbose):
         sys.exit(1)
 
     # Validate global templates
-    tpl_file = os.path.join(tpl_dir, TEMPLATES["apache22"])
-    if not os.path.isfile(tpl_file):
-        log(0, "Apache 2.2 template file does not exist: {}".format(tpl_file), verbose)
-        log(0, "Type --help for help", verbose)
-        sys.exit(1)
-
     tpl_file = os.path.join(tpl_dir, TEMPLATES["apache24"])
     if not os.path.isfile(tpl_file):
         log(0, "Apache 2.4 template file does not exist: {}".format(tpl_file), verbose)
@@ -441,7 +435,7 @@ def validate_config(config, verbose):
     # Validate server type
     valid_hosts = list(TEMPLATES.keys())
     if config["server"] not in valid_hosts:
-        log(0, "httpd.server must be 'apache22', 'apache24' or 'nginx'", verbose)
+        log(0, "httpd.server must be 'apache24' or 'nginx'", verbose)
         log(0, "Your configuration is: " + config["server"], verbose)
         sys.exit(1)
 
@@ -471,8 +465,8 @@ def vhost_get_http_proto(config, ssl):
 
     if config["server"] == "nginx":
         if ssl and config["vhost"]["ssl"]["http2"]:
-            return " http2"
-
+            return "http2 on;"
+        return "http2 off;"
     return ""
 
 
@@ -490,11 +484,11 @@ def vhost_get_default_server(config, default):
             # separate it from the port directive left to it.
             return " default_server"
 
-        if config["server"] in ("apache22", "apache24"):
+        if config["server"] in ("apache24"):
             return "_default_"
 
     else:
-        if config["server"] in ("apache22", "apache24"):
+        if config["server"] in ("apache24"):
             return "*"
 
     return ""
